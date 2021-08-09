@@ -73,6 +73,8 @@ melodine_dir = os.path.join(os.path.expanduser('~'), '.melodine')
 queue_dir = os.path.join(os.path.expanduser('~'), 'queue')
 music_dir = os.path.join(os.path.expanduser('~'), 'music')
 #endregion
+def set_path(path):
+	song_path = path
 def centre(string, length, character = " "):
     return character * int((length - len(string)) / 2) + string + character * math.ceil((length - len(string)) / 2)
 
@@ -117,6 +119,9 @@ def make_table(rows, labels = None, centered = False):
     return "\n".join(frame)
 
 #region Music Functions
+def get_path():
+	path = song_path
+	return path
 def get_music(search_term, save_as, out_dir, sleep_val = 0, part = True):
 	alpha_list = list(string.printable)[: -6]
 	alpha_list.remove('/')
@@ -150,7 +155,7 @@ def get_music(search_term, save_as, out_dir, sleep_val = 0, part = True):
 		song = pafy.new(le_url)
 		best = song.getbestaudio(preftype="m4a")
 		path = f"{music_dir}/{formatted_search_term}.{best.extension}"
-		song_path = path
+		set_path(path)
 		print(song_path)
 		best.download(filepath=path)
 

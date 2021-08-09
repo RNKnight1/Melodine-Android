@@ -12,7 +12,8 @@ Melodine is a simple command line tool to play and download music.
     	.quit - Exits the program gracefully."""
 ) 
 def play(song):
-	os.system(f"mpv {song}")
+	print("mpv " +  song)
+	os.system("mpv " + song)
 def queue_check():
 	global music_dir
 	global queue_dir
@@ -27,12 +28,14 @@ def queue_check():
 			song_with_ext = song + '.wav'
 			if os.path.exists(os.path.join(music_dir, song_with_ext)) == False and os.path.exists(os.path.join(queue_dir, song_with_ext)) == False:
 				print("\r--- song dowloading since it isn't already downloaded. \n>>>", end = ' ')
-				get_music(song_path, None, 'music')
+				get_music(song, None, 'music')
+				#print("wtf" + song_path)
 				print("\r--- song already downloaded, playing now. \n>>>", end = ' ')
 	
 			print(f'\r--- playing {song} \n>>> ', end = '')
 			print(song)
 			get_recs(song)
+			#print("qc " + song_path)
 			play(song_path)
 
 			print(f'\r--- done playing {song}\n>>> ', end = '')
