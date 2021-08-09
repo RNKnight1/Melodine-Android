@@ -12,7 +12,7 @@ Melodine is a simple command line tool to play and download music.
     	.quit - Exits the program gracefully."""
 ) 
 def play(song):
-	os.system(f"termux-media-player play {song})
+	os.system(f"termux-media-player play {song}")
 def queue_check():
 	global music_dir
 	global queue_dir
