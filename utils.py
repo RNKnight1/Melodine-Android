@@ -149,7 +149,7 @@ def get_music(search_term, save_as, out_dir, sleep_val = 0, part = True):
 
 		song = pafy.new(le_url)
 		best = song.getbestaudio(preftype="m4a")
-		path = f"{music_dir}/{formatted_search_term}{best.extension}"
+		path = f"{music_dir}/{formatted_search_term}.{best.extension}"
 		song_path = path
 		best.download(filepath=path)
 
