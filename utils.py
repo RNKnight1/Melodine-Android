@@ -9,7 +9,6 @@ import string
 import socket
 import traceback
 from json import loads
-from ffpyplayer.player import MediaPlayer
 from spotipy.oauth2 import SpotifyClientCredentials
 import spotipy
 import pafy
@@ -67,7 +66,8 @@ now_playing.append('placeholder')
 
 global status_dir
 status_dir = {}
-
+global song_path
+song_path = ""
 global melodine_dir
 melodine_dir = os.path.join(os.path.expanduser('~'), '.melodine')
 queue_dir = os.path.join(os.path.expanduser('~'), 'queue')
@@ -149,7 +149,9 @@ def get_music(search_term, save_as, out_dir, sleep_val = 0, part = True):
 
 		song = pafy.new(le_url)
 		best = song.getbestaudio()
-		best.download(filepath=f"{music_dir}/{formatted_search_term}{best.extension}")
+		path = f"{music_dir}/{formatted_search_term}{best.extension}"
+		song_path = path
+		best.download(filepath=path)
 
 		status_dir[search_term] = 'downloaded'
 	except Exception as e:

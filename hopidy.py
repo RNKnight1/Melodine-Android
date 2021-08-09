@@ -1,5 +1,4 @@
 from utils import *
-import discord_rpc
 print("""
 Welcome to Melodine. 
 Melodine is a simple command line tool to play and download music.
@@ -12,51 +11,8 @@ Melodine is a simple command line tool to play and download music.
     	.nowp - Displays currently playing song.
     	.quit - Exits the program gracefully."""
 ) 
-discord_rpc.set_status("nothing peeposad")
-def ffplay(song):
-
-	global player
-	global vol
-
-	search_term = song
-	formatted_search_term = search_term.replace(' ', '+')
-
-	html = requests.get("https://www.youtube.com/results?search_query=" + formatted_search_term)
-	video_ids = re.findall(r"watch\?v=(\S{11})", str(html.content))
-	video = pafy.new(video_ids[0])
-	best = video.getbestaudio()
-	url = best.url
-	opts = {'sync' : 'audio'}
-	player = MediaPlayer(url, ffopts = opts)
-	put_notification(song)
-	discord_rpc.set_status(video.title)
-	#threading._start_new_thread(discord_rpc.update_discord(), ())
-	print("passed")
-	player.toggle_pause()
-	time.sleep(1)
-	player.toggle_pause()
-	last_pts = 0
-	updated_pts = 0
-	while True:
-		updated_pts = int(float(str(player.get_pts())[: 3])) - 3
-
-		while player.get_pause():
-			time.sleep(0.4)
-
-		if updated_pts == last_pts:
-			player.toggle_pause()
-			time.sleep(4)	
-			player.toggle_pause()
-
-		if int(float(str(player.get_pts())[: 3])) - 3 == int(float(str(player.get_metadata()['duration'])[: 3])) - 3:
-			player.set_mute(True)
-			player.toggle_pause()
-			time.sleep(1)
-			player.close_player()
-			discord_rpc.set_status("nothing peeposad")
-			break
-		time.sleep(1)
-		last_pts = updated_pts
+def play(song):
+	os.system(f"termux-media-player play {song})
 def queue_check():
 	global music_dir
 	global queue_dir
@@ -69,15 +25,15 @@ def queue_check():
 				continue
 				#time.sleep(3.7)
 			song_with_ext = song + '.wav'
-			#if os.path.exists(os.path.join(music_dir, song_with_ext)) == False and os.path.exists(os.path.join(queue_dir, song_with_ext)) == False:
-				#print("\r--- song dowloading since it isn't already downloaded. \n>>>", end = ' ')
-				#get_music(song, None, 'queue')
-				#print("\r--- song already downloaded, playing now. \n>>>", end = ' ')
+			if os.path.exists(os.path.join(music_dir, song_with_ext)) == False and os.path.exists(os.path.join(queue_dir, song_with_ext)) == False:
+				print("\r--- song dowloading since it isn't already downloaded. \n>>>", end = ' ')
+				get_music(song, None, 'queue')
+				print("\r--- song already downloaded, playing now. \n>>>", end = ' ')
 	
 			print(f'\r--- playing {song} \n>>> ', end = '')
 			print(song)
 			get_recs(song)
-			ffplay(song)
+			play(song_path)
 
 			print(f'\r--- done playing {song}\n>>> ', end = '')
 			
