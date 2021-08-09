@@ -27,7 +27,7 @@ def queue_check():
 			song_with_ext = song + '.wav'
 			if os.path.exists(os.path.join(music_dir, song_with_ext)) == False and os.path.exists(os.path.join(queue_dir, song_with_ext)) == False:
 				print("\r--- song dowloading since it isn't already downloaded. \n>>>", end = ' ')
-				get_music(song, None, 'queue')
+				get_music(song_path, None, 'queue')
 				print("\r--- song already downloaded, playing now. \n>>>", end = ' ')
 	
 			print(f'\r--- playing {song} \n>>> ', end = '')
