@@ -1,4 +1,3 @@
-ffpyplayer
 youtube_dl
 spotipy
 py-notifier
