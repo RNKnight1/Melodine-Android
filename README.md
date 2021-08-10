@@ -15,7 +15,23 @@ A command-line(for now) tool to play and download music from YouTube. Made mainl
 - Group listening.
 
 ## Usage
-Download the code and run the main.py file.
+For android:
+Enter Termux
+Run this:
+
+	pkg upgrade
+	pkg install git
+
+Then run this:
+
+	git clone https://github.com/RNKnight1/Melodine-Android
+	cd Melodine-Android
+	sh setup.sh
+
+This should download the code and set it up.
+
+Run the program with
+	python ~/Melodine-Android/hopidy.py
 
 ### Commands
 - .play \<Song Name> - Plays the top result for the search term.
