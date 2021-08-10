@@ -1,4 +1,5 @@
 from utils import *
+import get_m
 print("""
 Welcome to Melodine. 
 Melodine is a simple command line tool to play and download music.
@@ -28,7 +29,7 @@ def queue_check():
 			song_with_ext = song + '.wav'
 			if os.path.exists(os.path.join(music_dir, song_with_ext)) == False and os.path.exists(os.path.join(queue_dir, song_with_ext)) == False:
 				print("\r--- song dowloading since it isn't already downloaded. \n>>>", end = ' ')
-				get_music(song, None, 'music')
+				get_m.get_music(song, None, 'music')
 				#print("wtf" + song_path)
 				print("\r--- song already downloaded, playing now. \n>>>", end = ' ')
 	
@@ -36,7 +37,7 @@ def queue_check():
 			print(song)
 			get_recs(song)
 			#print("qc " + song_path)
-			play(song_path)
+			play(get_m.song_path)
 
 			print(f'\r--- done playing {song}\n>>> ', end = '')
 			
@@ -185,7 +186,7 @@ while True:
 		print('\r--- (enter the name for the audio file to be saved as) \n---', end = " ")
 		save_as = str(input())
 
-		threading._start_new_thread(get_music, (song, save_as, 'music', ))
+		threading._start_new_thread(get_m.get_music, (song, save_as, 'music', ))
 
 	elif '.showq' in command:
 		for song in queue:
@@ -245,7 +246,7 @@ while True:
 
 		print(f'--- streaming "{title}"')
 
-		threading._start_new_thread(get_music, (title, None, 'queue', 0, False))
+		threading._start_new_thread(get_m.get_music, (title, None, 'queue', 0, False))
 
 		time.sleep(5)
 
