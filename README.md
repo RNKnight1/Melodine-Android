@@ -1,5 +1,6 @@
 <h1 align="center">Melodine</h1>
 
+## Development is more or less stopped. Due to ffpyplayer being unable to be used on android, media controls do not work.
 ## Description
 A command-line(for now) tool to play and download music from YouTube. Made mainly by an expert Python programmer and a novice Python programmer annoyed by Spotify Free's limitations.
 
